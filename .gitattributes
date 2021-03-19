@@ -4,3 +4,5 @@
 *.bb2 linguist-vendored
 *.hlp linguist-vendored
 *.md linguist-vendored
+yamapl/hardware.apl linguist-vendored
+yamint3/hardware.i3 linguist-vendored
