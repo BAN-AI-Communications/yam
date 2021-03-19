@@ -2,9 +2,10 @@
 
 ## Reporting a Vulnerability
 
-* To report a security vulnerability in YAM, please email [Jeffrey H. Johnson](mailto:trnsz@pobox.com).
+- To report a security vulnerability in YAM, please email
+  [Jeffrey H. Johnson](mailto:trnsz@pobox.com).
 
-  * PGP encrypted mail preferred.
+  - PGP encrypted mail preferred.
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
