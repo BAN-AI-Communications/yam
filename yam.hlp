@@ -1,0 +1,393 @@
+INTRODUCTION to the YAM Communications Utility
+The "YAM" family of programs
+Getting "YAM" to your computer 
+YAMBOOT details
+The YAM/MODEM Handshake Protocol
+Other programs which WILL work with YAM ** 20/Jun/84 **
+Other programs which MAY work with YAM
+Preconfigured versions of YAM for specific computers
+XYAM
+Using CRCK to check file transfers
+Adapt this help file to your needs
+:Introduction
+
+The  concept  of  Remote CP/M (RCPM) systems relies  on  users 
+having the ability to transfer files to and from the system in 
+some  secure  manner.  The  security  comes  from  handshaking 
+between  the sender and receiver to let the sender  know  that 
+the receiver got a good (no errors) copy of the file.
+
+Prior to the advent of RCPM type systems there had been little 
+need  for these type of programs in Australia as microcomputer 
+users have not been strongly communications  oriented,  mostly 
+due  to  restrictive  policies on the part  of  Telecom.  What 
+little  need  there  has  been  has  been  met,  in  the  CP/M 
+environment at least, by commercial programs such as BSTAM. 
+
+What  is  required for interactive communication with  a  RCPM 
+system  is utility which will allow ASCII  communications  for 
+login  and  RCPM  command  instigation  and  will  also  allow 
+handshaking  (or  protocol) file transfers in both  directions 
+without  having  to  return to the  operating  system  command 
+level.
+
+
+In the USA,  RCPM systems have been on line for several  years 
+and  numerous  programs which fulfill the  above  requirements 
+have been developed. Development has follwed two streams.
+
+The first stream is the series of programs which go under  the 
+generic  title  of  "MODEM".  These programs all stem  from  a 
+program  written  by  Ward  Christensen  for  the  very  first 
+microcomputer bulletin board system in the world,  the Chicago 
+CBBS. The MODEM programs are all written in assembler code and 
+are in the public domain.
+
+The  second stream is a series of programs which go under  the 
+name of YAM ("Y"et "A"nother "M"odem program).  These programs 
+stem  from attempts to rewrite the MODEM programs into the "C" 
+high level language. The YAM programs, by Chuck Forsberg, grew 
+from  the MODEM.C programs.  YAM offers many  more  facilities 
+than  MODEM  and is easier to maintain.  YAM programs use  the 
+same  protocols as the MODEM programs and they will "talk"  to 
+each other. They are also in the public domain.
+
+:The "YAM" family of programs
+
+YAM is written in a modern,  high level language,  "C". It was 
+written  with the idea that it should be transportable to non- 
+CP/M  environments  and  is the best choice  if  you  are  not 
+running  in a CP/M environment.  I also consider it  the  best 
+choice if you are running CP/M.
+
+The  program  is written in a modular manner and all the  UART 
+dependent  routines  are contained in a  single  module.  Some 
+other  hardware dependent information (such as port  addresses 
+etc)  is  contained  in header files.  This make  it  easy  to 
+support  multiple versions of YAM from substantially the  same 
+set  of files.  The SYSOP is currently supporting 3  different 
+UART versions of YAM from the one set of source files.
+
+
+
+
+
+
+
+
+You  will need to have the BDS "C" compiler,  version 1.50  or 
+later, to compile YAM-80. 
+
+If  you  are  comfortable with the  "C"  language  you  should 
+definitely  use  YAM  instead of MODEM.  Even if you  are  not 
+familiar  with "C" it is worth the effort of learning,  to  be 
+able to compile YAM.  YAM is a much more flexible utility than 
+MODEM  and  is  typical of the numerous  high  quality  public 
+domain utilities available in "C".
+
+The version of YAM-80 currently available is YAM 3.12. See the 
+file YAM.DOC for full documentation on the program. 
+
+A CP/M-86 version of YAM is also available from SIG/M.
+
+:Getting "YAM" to your computer
+
+Until  you have a copy of YAM the only way to transfer data is 
+as  ASCII  text.  YAM  is a big program  and  the  chances  of 
+transferring it via phone without some errors is not good.
+
+The solution is to use either of the short programs  YAMBOOT.C 
+or  MBOOT.ASM.  YAMBOOT is a minimal version of YAM (well sort 
+of)  and MBOOT is a minimal version of MODEM .  Virtually  all 
+they can do is receive files using the "Christensen" protocol. 
+The  basic  idea is that you transfer YAMBOOT.C or  MBOOT.ASM, 
+which  are relatively short,  to your system as ASCII text  by 
+typing  the  file.  (See the "YAMBOOT  details"  category  for 
+details).   You  then  compile/assemble  YAMBOOT/MBOOT,   with 
+appropriate UART data for your system,  and use it to transfer 
+YAM with the security of a protocol transfer.
+
+Then you compile the YAM source code with for your computer.   
+:YAMBOOT details
+
+There  is a program called YAMBOOT.C which is the made up from 
+parts of the YAM program but has no 'frills'.
+
+If  you  have some way to print your dialog with  this  system 
+then TYPE the file,  and print it to your printer.  YAMBOOT is 
+then small enough to type into your system and compile.
+
+Alternatively  if you have an ASCII transfer program  such  as 
+BSTMS,  TELNET,  ASCOM  etc which allows you to capture  ASCII 
+text  from a remote system,  you can save the  YAMBOOT  source 
+text as a file and avoid the retyping before compiling it. 
+
+When  YAMBOOT has been compiled you can down-load the full YAM 
+program.
+
+See  the READ-ME.YAM file and YAMBOOT.C itself for details  of 
+what you need to know to compile YAMBOOT.
+
+
+
+
+YAMBOOT is the MUCH easier to get going than MBOOT if you have 
+the BDS "C" compiler. You only need to have your BDSCIO.H file 
+set  up correctly for your modem port (which is obviously  the 
+case  if  you are using TELNET).  Then you should be  able  to 
+compile YAMBOOT without any changes at all.
+
+:The YAM/MODEM Handshake Protocol
+
+Both  YAM  and  MODEM  use the  same  handshake  protocol  for 
+transferring  single files and can work with each other.  They 
+use a different protocol in the "batch" mode and will NOT work 
+with each other in this mode.  Both YAM and MODEM use the same 
+CRC  check when running in that mode and will work  with  each 
+other for single file transfers.
+
+The "Christensen" protocol used by YAM and MODEM is  described 
+in the file PROTOCOL.LBR available through SIG/M.
+
+:Other programs which WILL work with YAM
+
+Listed  below  are other programs which the SYSOP  knows  will 
+work YAM. If you know of others please leave a message for the 
+SYSOP.
+
+"RCPMLINK.COM" for the Osborne 1 computer.
+
+This  program uses the "Christensen" protocols and is  claimed 
+to  be  fully compatible with MODEM.  The SYSOP has tested  it 
+with YAM and successfully transferred files in both directions 
+in  the  single file mode.  RCPMLINK is a  commercial  program 
+based on MODEM. 
+
+
+"CMODEM.C"
+
+This program is from the "CNODE" RCPM system in the USA and is 
+written  in BDS "C".  I have tested it with XYAM and it  works 
+fine. It is an enhanced version of YAMBOOT and will send files 
+as  well  as receive them,  but is really only a very  minimal 
+communications utility. It is a public domain program.
+
+
+Since  the  full YAM source is available and it  offers  many, 
+many more facilities than CMODEM,  there seems little point in 
+using CMODEM. However if you have unusual hardware and find it 
+difficult  to get YAM going CMODEM would probably be a  easier 
+to adapt.  It should certainly run on any system that can  run 
+TELNET.   Alternatively if you have a low capacity disk system 
+or  are  short  of memory the smaller size of  CMODEM  may  be 
+attractive   to   you.   See   the  start  of   CMODEM.C   for 
+documentation.
+
+
+"MODEM86"
+
+This  program is from Compuview Products and runs  under  both 
+CP/M-86 and MSDOS. It is basically an "86" version of MODEM 7. 
+It  has  a few installation selections but unless you have  an 
+IBM-PC  or  Sirius-1  be  prepared to  do  some  86  assembler 
+programming  to get this program working.  I was able  to  get 
+MODEM86  running  on  my  Godbout system and on  the  NEC  APC 
+without too much hassle. Once its running, it works well!  
+
+
+"TELED"
+
+This  public domain program is distributed with BDS C  Version 
+1.50  or  later.  It  offers considerably more  features  than 
+CMODEM  but  considerably  less than  YAM.  I  would  rate  it 
+relatively easy to get going and a good first excercise if you 
+ae just getting used to C as a programming language.  It works 
+well  with  XYAM.  
+
+
+"MITE"
+
+This  commercial  program is from Mycroft Labs  and  is  quite 
+nicely  done.  It is available in CP/M-80,  CP/M-86 and  MSDOS 
+versions.  It  comes with interfaces to several popular micro- 
+computers as well as enough information to write a  customised 
+interface if you can't use one of the supplied ones.   It took 
+me a few hours one evening to write a 2651 USART interface for 
+my Godbout S-100 system. The program has both a menu system or 
+a  series of direct commands.  Also useful is a parameter file 
+system which allows all the parameters which govern  operation 
+with  any  particular  remote system to be stashed away  in  a 
+parameter file, then recalled and automatically set.
+
+As well as Christensen protocol it supports the Mycroft, CLINK 
+and LYNC binary protocols.  Works well with XYAM.  The  manual 
+also   contains   some   good  tutorial   material   on   data 
+communications and the RS-232-C standard. Somewhere about half 
+way between MODEM and YAM in terms of features and facilities.
+
+
+"ASCOM"
+
+Later versions of this program from DMA support what they term 
+"CP/M   User   Group  Protocol"  which  is  their   name   for 
+"Christensen" protocol. I have tested ASCOM Ver 2.4 on a CP/M- 
+86  system with XYAM and it worked fine in file transfer  mode 
+in both directions.  I assume that the equivalent CP/M-80  and 
+MSDOS  versions  should  also work OK.  Be  careful  with  the 
+interface  routines for you USART.  I had to rewrite the  8251 
+interface for the NEC APC I was using to test ASCOM on, as the 
+APC interface supplied by DMA had no hope of working.
+
+
+"MODEM-901/86"
+
+This is a public domain program translated to CP/M-86 from the 
+CP/M-80  version  by  Mike  Mellinger  and  I.  It  should  be 
+adaptable  for  any CP/M-86 system (but  not  with  Concurrent 
+CP/M-86   without  further  work).   It  has  been  tested  on 
+Godbout/Compupro,  NEC  APC  and DEC Rainbow 100  systems.  It 
+available through SIG/M in MODEM-86.LBR.
+
+
+MODEM68
+
+This is a public domain program written in 6800 assembler  for 
+operation under the FLEX operating system. It was developed at 
+Telecom Australia and is claimed by Telecom 6800 users to work 
+well.  As I don't have access to a 6800 system I haven't  ever 
+used  it myself.  The program is supposed to "look" very  much 
+like MODEM7 as far as the user interface goes.
+
+MODEM68 is available through SIG/M as MOD68-13.LBR
+
+
+UMODEM
+
+This program is written in "C" for Unix systems. It implements 
+the  "Christensen"  protocol and is compatible  with  YAM  and 
+MODEM.  Version 2.7  has been implemented on the BASSER-VAX at 
+Sydney University and works fine in non-batch mode.
+
+
+
+PC-TALK
+
+This program is written in BASIC for the IBM-PC running PCDOS. 
+It  implements Christensen protocol and is compatible with YAM 
+and MODEM.  Being written in BASIC it is slow,  good only  for 
+300  bps operation with the IBM BASIC interpreter and 1200 bps 
+operation  with  IBM  BASIC  compiler.  The  source  code  and 
+documentation are available on PC/BLUE volumes 31 and 32.
+
+
+DOS/65 MODEM
+
+This  comes  with the DOS/65 operating system for  6502  based 
+machines. Several users have told me that it does successfully 
+transfer files with XYAM from this system.  I don't know where 
+you get it.
+
+:Other programs which MAY work with YAM
+
+Listed  below are other programs which the SYSOP suspects  may 
+work  with  YAM.  These programs have NOT been tested and  the 
+SYSOP would appreciate any further information.
+
+***  There  are  no programs which fit this  category  at  the 
+moment ***
+
+:Preconfigured version of YAM for specific systems
+
+With reasonable skill,  the "standard" versions of YAM/YAMBOOT 
+should  be able to be implemented on any CP/M system.  However 
+due to the non-standard nature of some  systems,  particularly 
+systems not originally intended for CP/M operation such as the 
+Apple 2,  a preconfigured version of the YAM may be available. 
+The   file  READ-ME.YAM  will  tell  you  which  preconfigured 
+versions are currently available.
+
+These preconfigured versions have been contributed by uses who 
+had to develop them the "hard" way. If you do a new version of 
+the communications utilities for your system please contribute 
+your  version so that other users of your type of  system  can 
+benefit from your efforts.
+
+:XYAM
+
+XYAM  is a special version of YAM.  It is designed for use  on 
+RCPM  systems  and  as  such  it  has  some  special  features 
+necessary in that sort of environment.
+
+Generally these features are designed to make them it for  the 
+remote  user  to control (i.e.  more messages) and to  prevent 
+"dangerous"  things  happening to the RCPM  system  (i.e.  COM 
+files  being  sent to the RCPM system and then being  used  to 
+crash the system). 
+
+On  any  RCPM system there are certain system files which  are 
+not  available for transfer (for a variety  of  reasons).  The 
+XYAM  program  can detect these files and  will  not  transfer 
+them.
+
+XYAM is a superior replacement for XMODEM. YAM and XYAM can be 
+built  from  the same set of source files.  You only  need  to 
+change a few definitions in the header files and recompile.
+
+:Using CRCK to check file transfers
+
+Whatever method you use to transfer files from a remote system 
+there is a way you can see if you ended up with a good copy of 
+the files. It involves comparing CRC checksums of the files.
+
+To  obtain  the CRC checksum of a file on the RCPM system  use 
+the XYAM utility. At the XYAM prompt give the command
+
+     CRCK filename
+
+XYAM  will give you a 4 digit hexadecimal number which is  the 
+checksum of the file derived using the CCITT polynomial.
+
+To obtain the CRC checksum at your end use the CRCK command in 
+your  copy  of YAM or if you aren't using YAM use the  CRC.COM 
+utility.  The  CRC checksum produced by CRC.COM is the same as 
+is produced by the CRCK function in YAM.
+
+The CRCK numbers for the file on the RCPM system and the  down 
+loaded  file on your system should be identical.  If they  are 
+not, an error occurred during the file transfer.
+
+
+
+The  same method can be used to check that files up loaded  to 
+the RCPM system were received correctly.
+
+The  more  recent User Group volumes will have CRC files  with 
+checksums  for  all the files on the volume or will  have  CRC 
+information  in  the  volume -CATALOG file.  If  you  have  to 
+archive  your  own  programs  its a good idea  to  put  a  CRC 
+checksum  file on each archive disk,  when you need to  access 
+the archive files you can easily check to see if the files are 
+still intact before using them.
+
+:Adapt this help file to your needs
+
+This  help  file for YAM is simply a cut down version  of  the 
+help  file  that I use on the Software Tools RCPM to  describe 
+both the MODEM and YAM to users of the system.  On one of  the 
+previous  SIG/M volumes you'll find an earlier version of  the 
+composite YAM/MODEM file called MODEM.HLP.
+
+You  should  adapt this help file to meet YOUR needs  on  your 
+system,  it is really here simply as a guide towards the sorts 
+of  things new users will need to know.  The great benefit  of 
+the HELP utility and HLP files is that users seem to  actually 
+READ  them,  which  is something they rarely seem to  do  with 
+conventional DOC files.
+
+My  idea with this help file is to arouse enough  interest  in 
+the  prospective YAM user to make them WANT to go out and read 
+the other YAM documentation files.
+
+                                   Bill Bolton,
+								   Software Tools RCPM
+                                   June 1, 1984

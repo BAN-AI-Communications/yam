@@ -1,0 +1,13 @@
+; Compilation and Linking of YAM.
+; 04/Jun/83
+;<<<  YAM compilation for DATAMAX 8000  [YAMDMX.COM]  >>>
+CC yam1.c -e 8000 -x
+CC yam2.c -e 8000 -o -x
+CC yam3.c -e 8000 -o -x
+CC yam5.c -e 8000 -o -x
+CC yam7.c -e 8000 -o -x -r15
+CC yam10.c -e 8000 -o -x
+CC yam11.c -e 8000 -o -x
+;l2 yam1 -l yam2 yam3 yam5 yam7 yam89 yam10 yam11 -o testyam
+clink yam1 yam2 yam3 yam5 yam7 yam89 yam10 yam11 -r 800 -o yamdmx -s
+

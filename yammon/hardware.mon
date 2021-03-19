@@ -1,0 +1,62 @@
+/*
+ * This header file contains hardware-dependent definitions for C programs.
+ *
+ * For MONROE, lifted from BDSCIO.MON (ver 1.46)
+ * This should work with both pre and post 1.50 programs.
+ */
+
+/*
+ * Some console (video) terminal characteristics:
+ */
+
+#define TWIDTH	80	/* # of columns	*/
+#define TLENGTH	24	/* # of lines	*/
+#define CLEARS	"\032"	/* String to clear screen on console	*/
+#define INTOREV	"\033J"	/* String to switch console to reverse video */
+#define OUTAREV "\033K"	/* String to switch console OUT of reverse video */
+#define CLRLINE "\033R"
+#define CLREOLN "\033T"
+#define CLRESCN "\033Y"
+#define CURPOS  "\033="
+#define ESC	'\033'	/* Standard ASCII 'escape' character	*/
+
+
+/*
+	The following definitions provide a portable low-level interface
+	for direct I/O to the  console and modem devices. The values
+	used here are only for example; be certain to go in and customize
+	them for your system! Note that only one of the two sections
+	(I/O port vs. memory mapped) will be needed for your system,
+	so feel free to edit the unused section out of the file and remove
+	the conditional compilation lines around the section you end up
+	using.
+*/
+
+#define CDATA		162
+#define CIDATA		CDATA
+#define CODATA		CDATA
+#define CSTAT		163
+#define CISTAT		CSTAT
+#define COSTAT		CSTAT
+#define CIMASK		0x01			/* input data available */
+#define COMASK		0x04			/* output data ready */
+#define CAHI		1			/* true if active stat high */
+#define CRESET		0			/* status reset after input */
+#define CRESETVAL	0			/* reset value to send */
+#define CON_TBE		(inp(COSTAT) & COMASK)	/* Console */
+#define CON_RDA		(inp(CISTAT) & CIMASK)
+#define CON_TDATA(byte)	(outp(COATA, byte))
+#define CON_RDATA	(inp(CIDATA))
+
+#define MDATA		164
+#define MSTAT		165
+#define MIMASK		0x01			/* input data available */
+#define MOMASK		0x04			/* output data ready */
+#define MAHI		1			/* true if active stat high */
+#define MRESET		0			/* status reset after input */
+#define MRESETVAL	0			/* reset value to send */
+#define	MOD_TBE		(inp(MSTAT) & MOMASK)	/* Modem */
+#define MOD_RDA		(inp(MSTAT) & MIMASK)
+#define	MOD_TDATA(byte)	(outp(MDATA, byte))
+#define	MOD_RDATA	(inp(MDATA))
+

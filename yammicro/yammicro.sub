@@ -1,0 +1,13 @@
+; Compilation and Linking of YAM
+; 15-Jul-83
+pip hardware.h=hardware.md
+pip yamsys.h=yammicro.h
+cc yam1.c -e 6C00 -x
+cc yam2.c -e 6C00 -o -x
+cc yam3.c -e 6C00 -o -x
+cc yam5.c -e 6C00 -o -x
+cc yam7.c -e 6C00 -o -x
+cc yam10.c -e 6C00 -o -x
+cc yam11.c -e 6C00 -o -x
+;ls yam1 -l yam2 yam3 yam5 yam7 yam89 yam10 yam11 -o yammdx
+clink yam1 -f yam2 yam3 yam5 yam7 yam89 yam10 yam11 -r 800 -o yammdx -s

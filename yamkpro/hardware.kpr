@@ -1,0 +1,48 @@
+/*
+ * This header file contains hardware-dependent definitions for C programs.
+ *
+ * For KAYPRO II, lifted from BDSCIO.KPR (ver 1.46)
+ * This should work with both pre and post 1.50 programs.
+ */
+
+/*
+	Some console (video) terminal characteristics:
+	Set to suit ADM-31 
+*/
+
+#define TWIDTH	80	/* # of columns	*/
+#define TLENGTH	24	/* # of lines	*/
+#define CLEARS	"\032"	/* String to clear screen on console	*/
+#define INTOREV	"\033)" /* String to switch console into highlight */
+#define OUTAREV "\033(" /* String to switch console OUT of highlight */
+#define ESC	'\033'	/* Standard ASCII 'escape' character	*/
+
+/*
+	Console serial port characteristics:
+*/
+
+#define CSTAT	0x01
+#define	CDATA	0x00
+#define CISTAT	CSTAT	/* console input status port	*/
+#define CIDATA	CDATA	/* console input data port	*/
+#define CIMASK	0x02	/* input data ready mask   */
+#define COSTAT	CSTAT	/* console output status port */
+#define CODATA	CDATA	/* console output data port */
+#define COMASK	0x01	/* output data ready mask  */
+#define CAHI	1	/* True if status active high	*/
+#define CRESET	0	/* True if status port needs to be reset after input */
+#define CRESETVAL 0	/* If CRESET is true, this is the value to send	*/
+
+/*
+	 Modem characteristics:
+*/
+
+#define MODREL  6
+#define MSTAT   6	/* status port */
+#define MDATA	4	/* data port	*/
+#define MIMASK	01	/* input data ready mask	*/
+#define MOMASK	04	/* ready to send a character mask	*/
+#define MAHI	1	/* True if status logic active high  */
+#define MRESET	0	/* True if status port needs to be reset */
+#define MRESETVAL 0	/* If MRESET true, this is the byte to send */
+

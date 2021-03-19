@@ -1,0 +1,14 @@
+; Compilation and Linking of YAM.
+; 15/Jul/83
+pip hardware.h=hardware.oki
+pip yamsys.h=yamoki.h
+cc yam1.c -e 6D00 -x
+cc yam2.c -e 6D00 -o -x
+cc yam3.c -e 6D00 -o -x
+cc yam5.c -e 6D00 -o -x
+cc yam7.c -e 6D00 -o -x
+cc yam10.c -e 6D00 -o -x
+cc yam11.c -e 6D00 -o -x
+;l2 yam1 -l yam2 yam3 yam5 yam7 yam89 yam10 yam11 -o yamoki
+clink yam1 -f yam2 yam3 yam5 yam7 yam89 yam10 yam11 -r 800 -o yamoki -s
+

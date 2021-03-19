@@ -1,0 +1,163 @@
+                       YAM SOURCE DISK
+
+                 This file updated 16/Feb/84
+
+The  amongst the files on this disk are the source  files  for 
+YAM.  Several  of  the header files are included  as  examples 
+only.  The  file  YAMRCPM.H, contained in XYAMRCPM.LBR, should 
+be taken as the  definitive example  file,   the other example 
+files  may  be older  versions which  may  not  fully  reflect 
+the  required   contents  of  the  YAMSYS  file.  The  current 
+version of YAM is 3.12.
+
+The  full documentation for YAM is contained in a file  called 
+YAM.DOC. 
+
+To compile YAM versions from 3.12 onward you MUST have BDS "C" 
+version 1.46 or later. Nested #ifdef statements have been used 
+to clean up the code in versions from 3.11 onward compared  to 
+earlier versions.  Nested #ifdef are only supported in BDS "C" 
+compilers from version 1.46 or later.  The present versions of 
+YAM  are  set up to be compiled with the version 1.50 BDS  "C" 
+compiler.  This  is mainly reflected in the way the SUB  files 
+are organised to control the compilation.
+
+Note  that  you  need to make a change to  the  BDSCIO.H  file 
+supplied  with  BDS "C" version 1.50.  Just add the  following 
+line somewhere in BDSCIO.H....
+
+#include <HARDWARE.H>
+
+
+YAM  is written in BDS "C" and you will need that compiler  if 
+you  want to change any aspect of YAM or customise it for your 
+hardware.  John  Hastwell-Batten has updated YAM8 and YAM9  to 
+the  new CSM format that BD Software introduced  with  version 
+1.46  of the BDS "C" compiler.  He also concatenated them into 
+one  file called YAM89.CSM.   As a convenience YAM89.CRL is on 
+this disk as well as YAM89.CSM, both are contained in YAM.LBR.  
+
+[Note  that  you may need to reassemble YAM89.CSM  (using  the 
+CASM utility supplied with BDS C) each time there is a  change 
+in the compiler version, this is because of changes in the run 
+time  support code.  Any changes in the run time support  that 
+affect  CRL  files are usually clearly noted in  the  compiler 
+documentation updates]
+
+The files on this disk are kept current.  They are the  source 
+files  from  which the current XYAM in use on this system  was 
+compiled  so  you  can  be assured  that  they  have  compiled 
+correctly.
+
+If  you create an implementation for another type of  computer 
+system  or  UART than those currently available on this  disk, 
+please download it to this system for distribution.  You  will 
+probably  only  need  to modify YAM5.C and a  header  file  to 
+become  your YAMSYS.H.  You may need to modify YAM11.C if  you 
+have a very strange console device.
+
+Note  that you will need to have HARDWARE.H set  up  correctly 
+for  your  hardware  to have any hope of compiling  a  working 
+version  of the full YAM program (but see the YAMBOOT  program 
+for  getting started).  The file HARDWARE.RCP is  included  on 
+this  disk  as  an  example  only.  It  is  the  companion  to 
+YAMRCPM.H and is in the XYAMRCPM.LBR file.
+
+All  the YAM source files are in the YAM.LBR.  You  MUST  have 
+this to get all the current files.  You will also need YAM.DOC 
+which  is  NOT  in  YAM.LBR.  You  may also  need  to  take  a 
+supplementry  LBR file from the list in the next  section.  If 
+you  don't  already have them,  you will need SQUEEZE.LBR  (or 
+already  have  a  copy of USQ.COM) and LU.OBJ  to  unpack  the 
+various YAM?????.LBR files.
+ 
+YAMBOOT  is a extra for the original YAM package.   This is  a 
+much  better  alternative to MBOOT for BDS "C" users.  If  you 
+have your BDSCIO.H set up correctly for the modem port on your 
+system,  you  should  be able to compile YAMBOOT  without  any 
+modifications.  Console  I/O for YAMBOOT is done  through  the 
+DIRECT  I/O call (6) in the BDOS of CP/M 2.2 so you don't need 
+to  know the details of your console ports  etc.
+
+                   SPECIFIC VERSIONS OF YAM
+                   ========================
+
+As well as the YAM.LBR file which everyone must have, you will 
+need  another LBR file with the headers and submit files  etc, 
+that are specific to you machine.
+
+APPLE 2 CP/M
+============
+Matt   Whelan has done the work on getting YAM up on an  APPLE  
+2 CP/M  system with a CCS 7710 serial I/O card.  The filenames  
+which  are   specific  for  the APPLE version are all  in  the 
+YAMAPL.LBR  file.  Other users with memory mapped I/O can  use 
+the  APPLE YAM files as an example  of what they will need  to  
+do.    Matt  also modified YAMBOOT and CMODEM  for  the  APPLE 
+(Thanks Matt!)
+
+SORCERER
+========
+John  Woolner has done the magic to get YAM running happily on 
+a Sorcerer. The keyboard scanning arrangement apparently makes
+the job much more complicated than it would at first  seem.  A 
+special  keyboard  handler is supplied,  as  a  CRL  file,  to 
+overcome  the  keyboard  scanning  problem.   Fortunately  the 
+Sorcerer  is very stable as a machine environment  (i.e.  they 
+all look just about identical) so its a case of "one size fits 
+all". The filenames which are specific to the Sorcerer version 
+all   have  "SOR" in them somewhere and are contained  in  the 
+YAMSOR.LBR file.
+
+SANYO M-1000
+============
+John Woolner did this one. You need the YAMSAN.LBR file.
+
+MONROE
+======
+John Woolner also got this one going.  You need the YAMMON.LBR 
+file.
+
+OKI
+===
+Yet another Woolner special. You need the YAMOKI.LBR file.
+ 
+Morrow MICRO DECISION
+=====================
+Blame the SYSOP for this one. You need the YAMMICRO.LBR file.
+
+GODBOUT/COMPUPRO
+================
+Blame the SYSOP for these ones too! There are several files to 
+look  at depending on which Compupro I/O  cards you are using.  
+You  should look for YAM?????.LBR files  with   S3,  I3,  INT, 
+INT3,  INTER  or RCP in them as they cover most of the  likely 
+combinations of Compupro I/O setups.  For those with MP/M 8-16 
+systems,  S3 is probably the best bet, though you will only be 
+able  to  run it under CP/M (roll on Christensen protocol  for 
+MODEM-816!).
+
+OSBORNE
+=======
+The  Osborne  version  has been  temporarily  withdrawn  until 
+someone  does  a  version that will work on  both  single  and 
+double density systems and that compiles under BDS "C" version 
+1.50 (go to it!).
+
+KAYPRO
+======
+Grant Daggard figured this one out.  You need the  YAMKPRO.LBR 
+file.
+
+DATAMAX
+=======
+I think Grant Daggard is reposible for this one too.  You need 
+the YAMDMX.LBR file.
+
+
+                              Happy YAM propogating,
+
+                              Bill Bolton, SYSOP
+                              Software Tools RCPM,
+                              Sydney, Australia
+                              February 16, 1984
