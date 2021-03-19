@@ -44,4 +44,3 @@
 #define MAHI	1	/* True if status logic active high  */
 #define MRESET	0	/* True if status port needs to be reset */
 #define MRESETVAL 0	/* If MRESET true, this is the byte to send */
-

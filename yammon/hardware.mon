@@ -59,4 +59,3 @@
 #define MOD_RDA		(inp(MSTAT) & MIMASK)
 #define	MOD_TDATA(byte)	(outp(MDATA, byte))
 #define	MOD_RDATA	(inp(MDATA))
-

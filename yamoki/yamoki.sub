@@ -11,4 +11,3 @@ cc yam10.c -e 6D00 -o -x
 cc yam11.c -e 6D00 -o -x
 ;l2 yam1 -l yam2 yam3 yam5 yam7 yam89 yam10 yam11 -o yamoki
 clink yam1 -f yam2 yam3 yam5 yam7 yam89 yam10 yam11 -r 800 -o yamoki -s
-
