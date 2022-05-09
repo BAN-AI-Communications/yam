@@ -1,6 +1,6 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c261bbb2b6f94920b6b031b41dd13a89)](https://app.codacy.com/gh/BAN-AI-Communications/yam?utm_source=github.com&utm_medium=referral&utm_content=BAN-AI-Communications/yam&utm_campaign=Badge_Grade_Settings)
+# YAM (Yet Another Modem)
 
-YAM (Yet Another Modem) July 12, 1984
+## July 12, 1984
 
 |           name |                                          description |
 | -------------: | ---------------------------------------------------: |
