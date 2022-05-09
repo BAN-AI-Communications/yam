@@ -1,4 +1,4 @@
-# YAM (Yet Another Modem) 
+# YAM (Yet Another Modem)
 
 ## July 12, 1984
 
